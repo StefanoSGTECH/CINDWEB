@@ -1,0 +1,54 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
+<script src="https://microsoft.github.io/PowerBI-JavaScript/demo/node_modules/powerbi-client/dist/powerbi.js"></script>
+
+<script type="text/javascript">
+    // https://docs.microsoft.com/en-us/javascript/api/overview/powerbi/configure-report-settings
+    window.onload = function () {
+        let params = new URLSearchParams(location.search);
+
+        // Read embed application token from Model
+        var accessToken = params.get('token');
+        var pageName = params.get('pageName');
+        console.log(pageName);
+        var reportId = params.get('reportId');
+        var groupId = params.get('groupId');
+
+        // Read embed URL from Model
+        var embedUrl = "https://app.powerbi.com/reportEmbed?reportId" + reportId + "&groupId=" + groupId;
+
+        // Read dashboard Id from Model
+        var embedReportId = params.get('reportId');
+
+        // Get models. models contains enums that can be used.
+        var models = window['powerbi-client'].models;
+
+        var config = {
+            type: 'report',
+            tokenType: models.TokenType.Aad,
+            accessToken: accessToken,
+            embedUrl: embedUrl,
+            id: embedReportId ,
+            pageName: pageName,
+            permissions: models.Permissions.Read,
+            viewMode: models.ViewMode.View,
+            filterType: models.FilterType.BasicFilter,
+            settings: {
+                filterPaneEnabled: false,
+                navContentPaneEnabled: false,
+                // background: models.BackgroundType.Transparent,
+                // layoutType: models.LayoutType.Custom,
+                // customLayout: {
+                //    displayOption: models.DisplayOption.FitToWidth
+                //}
+            },
+        };
+        // Get a reference to the embedded dashboard HTML element
+        var dashboardContainer = $('#reportContainer')[0] ;
+        // Embed the dashboard and display it within the div container.
+
+        var report = powerbi.embed(dashboardContainer, config);
+        report.fullscreen();
+    }
+</script>
+
+<div id="reportContainer" style="height:100%"></div>

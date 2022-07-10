@@ -1,0 +1,143 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+  <!-- Header -->
+  <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+      <div class="flex-1 min-w-0">
+          <!-- Title -->
+          <div class="mt-2">
+              <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                  Edit
+              </h2>
+          </div>
+      </div>
+  </div>
+
+  <!-- Main -->
+  <div class="flex-auto p-6 sm:p-10">
+
+      <div class="max-w-3xl">
+
+          <div class="mt-16 mb-8 text-3xl font-bold">Modifica</div>
+
+          <form
+              class="p-4 bg-card shadow rounded overflow-hidden"
+              [formGroup]="verticalStepperForm">
+              <mat-vertical-stepper
+                  [linear]="true"
+                  #verticalStepper>
+                  <mat-step
+                      [formGroupName]="'step1'"
+                      [stepControl]="verticalStepperForm.get('step1')"
+                      #verticalStepperStep1>
+                      <ng-template matStepLabel>Basic information</ng-template>
+                      <div class="flex">
+                          <mat-form-field class="flex-auto">
+                              <input
+                                  matInput
+                                  [formControlName]="'email'"
+                                  [placeholder]="'Email Address'"
+                                  required>
+                              <mat-icon
+                                  class="icon-size-5"
+                                  matPrefix
+                                  [svgIcon]="'heroicons_solid:mail'"></mat-icon>
+                          </mat-form-field>
+                      </div>
+                      <div class="flex justify-end">
+                          <button
+                              class="px-8"
+                              mat-flat-button
+                              [color]="'primary'"
+                              type="button"
+                              matStepperNext>
+                              Next
+                          </button>
+                      </div>
+                  </mat-step>
+
+                  <mat-step
+                      [formGroupName]="'step2'"
+                      [stepControl]="verticalStepperForm.get('step2')"
+                      #verticalStepperStep2>
+                      <ng-template matStepLabel>Profile</ng-template>
+                      <div class="flex flex-col gt-xs:flex-row">
+                          <mat-form-field class="flex-auto gt-xs:pr-3">
+                              <input
+                                  matInput
+                                  [formControlName]="'firstName'"
+                                  [placeholder]="'First name'"
+                                  required>
+                              <mat-icon
+                                  class="icon-size-5"
+                                  matPrefix
+                                  [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                          </mat-form-field>
+                          <mat-form-field class="flex-auto gt-xs:pl-3">
+                              <input
+                                  matInput
+                                  [formControlName]="'lastName'"
+                                  [placeholder]="'Last name'"
+                                  required>
+                              <mat-icon
+                                  class="icon-size-5"
+                                  matPrefix
+                                  [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                          </mat-form-field>
+                      </div>
+                      <div class="flex justify-end">
+                          <button
+                              class="px-8 mr-2"
+                              mat-flat-button
+                              [color]="'accent'"
+                              type="button"
+                              matStepperPrevious>
+                              Back
+                          </button>
+                          <button
+                              class="px-8"
+                              mat-flat-button
+                              [color]="'primary'"
+                              type="button"
+                              matStepperNext>
+                              Next
+                          </button>
+                      </div>
+                  </mat-step>
+
+                  <mat-step>
+                      <ng-template matStepLabel>Done</ng-template>
+                      <div class="flex justify-end mt-8">
+                          <button
+                              class="px-8 mr-2"
+                              mat-flat-button
+                              [color]="'accent'"
+                              type="button"
+                              matStepperPrevious>
+                              Back
+                          </button>
+                          <button
+                              class="px-8 mr-2"
+                              mat-flat-button
+                              [color]="'light'"
+                              type="reset"
+                              (click)="verticalStepper.reset();">
+                              Reset
+                          </button>
+                          <button
+                              class="px-8"
+                              mat-flat-button
+                              [color]="'primary'"
+                              type="button"
+                              (click)="update();">
+                              Update
+                          </button>
+                      </div>
+                  </mat-step>
+              </mat-vertical-stepper>
+          </form>
+
+      </div>
+
+  </div>
+
+</div>

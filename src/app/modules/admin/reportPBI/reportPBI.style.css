@@ -1,0 +1,6 @@
+iframe {
+    display: block;
+    border: none!important;         /* Reset default border */
+    height: 100%;        /* Viewport-relative units */
+    width: 100%;
+}
